@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import {
   Region as RegionWS,
   RegionParams,
@@ -8,10 +8,11 @@ import useRegionEvent from "../hooks/useRegionEvent";
 import useWavesurferContext from "../hooks/useWavesurferContext";
 
 export interface RegionProps extends RegionParams {
-  onClick?: EventHandler;
+  onClick?: MouseEventHandler;
+  onDoubleClick?: MouseEventHandler;
+  onContextMenu?: MouseEventHandler;
   onOver?: EventHandler;
   onLeave?: EventHandler;
-  onDoubleClick?: EventHandler;
   onIn?: EventHandler;
   onOut?: EventHandler;
   onRemove?: EventHandler;
@@ -24,6 +25,7 @@ export const Region = ({
   onLeave,
   onClick,
   onDoubleClick,
+  onContextMenu,
   onIn,
   onOut,
   onRemove,
@@ -93,6 +95,8 @@ export const Region = ({
   useRegionEvent(regionRef, "mouseleave", onLeave);
 
   useRegionEvent(regionRef, "dblclick", onDoubleClick);
+
+  useRegionEvent(regionRef, "contextmenu", onContextMenu);
 
   useRegionEvent(regionRef, "in", onIn);
 
